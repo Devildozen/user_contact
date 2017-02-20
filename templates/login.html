@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block main %}
+    <div id="login">
+        <br>
+        login: contact@localhost.com | 1231231231
+        <br>
+        pass: 123admin123
+        <br>
+        <form class="form-horizontal" name="LoginForm" action="/login/" method="post">
+        {% csrf_token %}
+        {% if next %}
+            <input type="hidden" name="next" value="{{ next }}" />
+        {% endif %}
+        <div class="control-group">
+            <label class="control-label" for="login">email or phone</label>
+            <div class="controls">
+                <input type="text" id="login" name="login"  placeholder="Email or Phone">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="password">Password</label>
+            <div class="controls">
+                <input type="password" name="password" id="password" placeholder="Password" value="123admin123">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn">Login</button>
+            </div>
+        </div>
+        </form>
+    </div>
+{% endblock %}

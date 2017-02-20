@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block main %}
+    <ul>
+        <li>username: {{ user.contact.username }}</li>
+        <li>email: {{ user.contact.email }}</li>
+        <li>phone_number: {{ user.contact.phone_number }}</li>
+    </ul>
+    <a href="/logout">logout</a>
+
+{% endblock main %}
