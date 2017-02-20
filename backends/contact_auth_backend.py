@@ -21,22 +21,9 @@ class ContactBackend(ModelBackend):
            params |= Q(**{field: username})
 
         try:
-            contact = Contact._default_manager.get(params)
-        except AuthModel.DoesNotExist:
+            user = Contact._default_manager.get(params).user
+        except (Contact.DoesNotExist, User.DoesNotExist):
             return None
         else:
-            try:
-                user = contact.user
-            except AuthModel.DoesNotExist:
-                return None
-            else:
-                if user.check_password(password) and self.user_can_authenticate(user):
-                    return user
-
-    def user_can_authenticate(self, user):
-        """
-        Reject users with is_active=False. Custom user models that don't have
-        that attribute are allowed.
-        """
-        is_active = getattr(user, 'is_active', None)
-        return is_active or is_active is None
+            if user.check_password(password) and self.user_can_authenticate(user):
+                return user

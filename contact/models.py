@@ -13,7 +13,6 @@ class User(AbstractUser):
     contact = models.OneToOneField('Contact', on_delete=models.CASCADE)
 
     def get_username(self):
-        "Return the identifying username for this User"
         return str(getattr(self, self.USERNAME_FIELD))
 
 
@@ -24,11 +23,3 @@ class Contact(models.Model):
     username = models.CharField(max_length=20, null=True, blank=True)
     email = models.CharField(max_length=20, null=True, blank=True)
     phone_number = models.CharField(max_length=20, null=True, blank=True)
-
-    # def check_password(self, raw_password):
-    #     try:
-    #         return self.user.check_password(raw_password)
-    #     except User.DoesNotExist:
-    #         return False
-
-
